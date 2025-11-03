@@ -35,6 +35,8 @@ def main(to_pred_dir, result_save_path):
         
     results = pd.DataFrame(results, columns=["filename", "label", "confidence"])
     # 输出文件为csv格式
+    save_dir = os.path.dirname(result_save_path)
+    os.makedirs(save_dir, exist_ok=True)
     results.to_csv(result_save_path, index=None, float_format='%.4f')
     return results
     # 如果因程序异常中断、或答题超时程序被动杀停，导致无csv文件生成，则本次执行无成绩。可考虑文件实时落地
